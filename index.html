@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>소개 페이지</title>
+  
+  <!-- 눈이 편안한 한글 폰트 (Pretendard) 연결 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+
+  <style>
+    /* ========================================================
+       전체 색상 및 테마 설정 (화이트, 라이트 우드, 그린)
+       ======================================================== */
+    :root {
+      --bg-color: #FBF0F3;          /* 은은하고 화사한 라이트 핑크 배경 */
+      --card-bg: #FFFFFF;           /* 카드 및 내용 배경 (순백색) */
+      --wood-light: #F2ECE4;        /* 라이트 우드 톤 (배경 포인트) */
+      --wood-border: #E5DDD3;       /* 부드러운 우드 계열 테두리 선 */
+      --wood-accent: #8C7A6B;       /* 차분한 우드 브라운 텍스트 색상 */
+      --green-primary: #2C5E43;     /* 단정하고 맑은 숲빛 그린 */
+      --green-hover: #224A34;       /* 버튼에 마우스 올렸을 때의 짙은 그린 */
+      --green-soft: #EDF4EE;        /* 연한 그린 바탕 (태그용) */
+      --text-main: #242926;         /* 기본 본문 글자색 (부드러운 다크 그레이) */
+      --text-sub: #5E6762;          /* 보조 글자색 */
+      --text-muted: #8E9893;        /* 옅은 글자색 */
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.7;
+      word-break: keep-all;
+      -webkit-font-smoothing: antialiased;
+      padding: 40px 20px 80px;
+    }
+
+    /* 전체 화면 중앙 정렬 및 반응형 컨테이너 */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* ---------------- 상단 헤더 / 프로필 ---------------- */
+    .profile-header {
+      padding: 40px 0 32px;
+      border-bottom: 1px solid var(--wood-border);
+      margin-bottom: 36px;
+    }
+
+    .profile-header-content {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .profile-avatar-wrap {
+      flex-shrink: 0;
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 4px 16px rgba(44, 94, 67, 0.12), 0 0 0 1px var(--wood-border);
+    }
+
+    .profile-text-wrap {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background-color: var(--wood-light);
+      color: var(--wood-accent);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      background-color: var(--green-primary);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .profile-name {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .profile-headline {
+      font-size: 18px;
+      color: var(--green-primary);
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* ---------------- 본문 섹션 카드 ---------------- */
+    .section-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--wood-border);
+      border-radius: var(--radius-lg);
+      padding: 32px 30px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(44, 94, 67, 0.03);
+    }
+
+    .section-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      background-color: var(--green-primary);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .intro-paragraph {
+      font-size: 15.5px;
+      color: var(--text-sub);
+      margin-bottom: 14px;
+    }
+
+    .intro-paragraph:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 12px;
+    }
+
+    .info-list li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 8px;
+      font-size: 15.5px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    .info-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-list li::before {
+      content: "•";
+      position: absolute;
+      left: 2px;
+      color: var(--green-primary);
+      font-weight: bold;
+    }
+
+    /* ---------------- 관심 분야 태그 목록 ---------------- */
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .tag-item {
+      background-color: var(--green-soft);
+      color: var(--green-primary);
+      border: 1px solid rgba(44, 94, 67, 0.15);
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* ---------------- 연락처 및 이메일 복사 영역 ---------------- */
+    .contact-box {
+      background-color: var(--wood-light);
+      border: 1px solid var(--wood-border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .email-display {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      user-select: all;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background-color: var(--green-primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 9px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      transition: background-color 0.15s ease;
+    }
+
+    .copy-btn:hover {
+      background-color: var(--green-hover);
+    }
+
+    .copy-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* 복사 완료 토스트 알림창 */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--text-main);
+      color: #FFFFFF;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 100;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    /* ---------------- 하단 푸터 ---------------- */
+    .page-footer {
+      text-align: center;
+      padding: 30px 0 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ---------------- 모바일 화면 대응 (반응형) ---------------- */
+    @media (max-width: 600px) {
+      body {
+        padding: 24px 16px 60px;
+      }
+
+      .profile-header {
+        padding: 20px 0 24px;
+        margin-bottom: 24px;
+      }
+
+      .profile-header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+      }
+
+      .profile-avatar {
+        width: 100px;
+        height: 100px;
+      }
+
+      .profile-name {
+        font-size: 26px;
+      }
+
+      .profile-headline {
+        font-size: 16px;
+      }
+
+      .section-card {
+        padding: 24px 18px;
+        margin-bottom: 18px;
+        border-radius: var(--radius-md);
+      }
+
+      .contact-box {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 12px;
+      }
+
+      .copy-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 11px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- ========================================================
+         1. 상단 프로필 영역
+         ✏️ [수정 방법]: 직함/이름과 한 줄 소개 문구를 내 것으로 바꿔보세요.
+         ======================================================== -->
+    <header class="profile-header">
+      <div class="profile-header-content">
+        <!-- 🖼️ 프로필 이미지 (2D 일러스트 캐릭터) -->
+        <div class="profile-avatar-wrap">
+          <img src="profile.jpg" alt="프로필 이미지" class="profile-avatar">
+        </div>
+
+        <div class="profile-text-wrap">
+          <div class="badge-pill">
+            <span class="badge-dot"></span>
+            <span>소개 페이지</span>
+          </div>
+
+          <!-- ✏️ 여기에 이름 또는 닉네임을 적어주세요 -->
+          <h1 class="profile-name">프랑스어 통번역사</h1>
+
+          <!-- ✏️ 나를 나타내는 한 줄 소개 -->
+          <p class="profile-headline">다양한 분야에서 수년간 활동해 온 프리랜서 프랑스어 통번역사입니다.</p>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- ========================================================
+         2. 자세한 소개 글 영역
+         ✏️ [수정 방법]: 아래 이력 및 소개 문구를 자유롭게 추가/수정해보세요.
+         ======================================================== -->
+    <section class="section-card">
+      <h2 class="section-title">소개</h2>
+      
+      <p class="intro-paragraph">
+        다양한 분야에서 수년간 활동해 온 프리랜서 프랑스어 통번역사입니다. 풍부한 실무 경험을 바탕으로 정확하고 자연스러운 언어 소통을 돕습니다.
+      </p>
+
+      <!-- 주요 이력 및 학력 목록 -->
+      <ul class="info-list">
+        <li>한국외국어대학교 통번역대학원 한불과 졸업</li>
+        <li>(현) 법원, 검찰, 경찰청 통번역관</li>
+        <li>(현) 웹툰 번역</li>
+        <li>(현) 프랑스어 기사 번역</li>
+        <li>(전) 르몽드 디플로마티크 번역</li>
+      </ul>
+    </section>
+
+
+    <!-- ========================================================
+         3. 관심 분야 및 키워드 태그 영역
+         ✏️ [수정 방법]: 따옴표 안의 단어를 내 관심사나 취미로 바꿔보세요.
+         ======================================================== -->
+    <section class="section-card">
+      <h2 class="section-title">관심 분야 &amp; 키워드</h2>
+      <div class="tag-container">
+        <!-- ✏️ 필요에 따라 단어를 변경하거나 줄을 복사해서 추가할 수 있습니다 -->
+        <span class="tag-item">#프랑스어통역</span>
+        <span class="tag-item">#사법통번역</span>
+        <span class="tag-item">#웹툰번역</span>
+        <span class="tag-item">#기사번역</span>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         4. 연락처 및 문의 안내 (이메일 복사 기능)
+         ✏️ [수정 방법]: 'yourname@example.com'을 내 실제 이메일로 바꿔주세요.
+         ======================================================== -->
+    <section class="section-card">
+      <h2 class="section-title">연락처</h2>
+      <p class="intro-paragraph">
+        궁금한 점이 있거나 소통을 원하시면 언제든 편하게 이메일로 연락해 주세요.
+      </p>
+
+      <div class="contact-box">
+        <!-- ✏️ 화면에 표시되는 이메일 주소 -->
+        <span class="email-display" id="email-text">ounhea@gmail.com</span>
+        
+        <!-- 이메일 복사 버튼 -->
+        <button type="button" class="copy-btn" id="copy-button">
+          <!-- 복사 아이콘 SVG -->
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          이메일 복사
+        </button>
+      </div>
+    </section>
+
+
+    <!-- ========================================================
+         5. 하단 저작권 표시
+         ======================================================== -->
+    <footer class="page-footer">
+      <p>© 2026. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <!-- 복사 완료 시 나타나는 알림창 -->
+  <div class="toast" id="toast-message">이메일 주소가 복사되었습니다!</div>
+
+  <!-- ========================================================
+       이메일 복사 동작 스크립트
+       ======================================================== -->
+  <script>
+    const copyButton = document.getElementById('copy-button');
+    const emailText = document.getElementById('email-text');
+    const toast = document.getElementById('toast-message');
+    let toastTimer;
+
+    copyButton.addEventListener('click', function () {
+      const email = emailText.innerText.trim();
+      
+      // 클립보드에 이메일 복사
+      navigator.clipboard.writeText(email).then(function () {
+        // 알림 토스트 띄우기
+        toast.classList.add('show');
+        
+        if (toastTimer) clearTimeout(toastTimer);
+        
+        toastTimer = setTimeout(function () {
+          toast.classList.remove('show');
+        }, 2000);
+      }).catch(function () {
+        alert('복사에 실패했습니다. 이메일 주소를 직접 드래그해서 복사해 주세요.');
+      });
+    });
+  </script>
+
+</body>
+</html>
